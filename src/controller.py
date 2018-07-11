@@ -33,9 +33,11 @@ def main():
     controller.getModel().makeMove(6, 1)
     controller.getModel().makeMove(6, 22)
     controller.getModel().makeMove(0, 21)
-    controller.getModel().makeMove(0, 22)
+    #controller.getModel().makeMove(0, 22)  #expected failure
 
     controller.getView().printConsole(controller.getModel().getBoard().getBoard())
+
+    print(controller.getModel().getBoard().areNConnected())
     input()
 
 main()

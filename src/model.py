@@ -3,7 +3,8 @@ import numpy as np
 import constants
 
 class Model:
-    def __init__(self, p1 = True, p2 = True, boardHeight = constants.boardHeight, boardWidth = constants.boardWidth): #p1 and p2 are booleans indiciating whether they're human players
+    #p1 and p2 are booleans indiciating whether they're human players
+    def __init__(self, p1 = True, p2 = True, boardHeight = constants.boardHeight, boardWidth = constants.boardWidth):
         if (p1):
             self.__p1 = Player(p1)
 
@@ -90,18 +91,38 @@ class Board:
         return temp
 
     def areNConnected(self):            #returns 0 for no winner, or player number
-        for i in range(constants.boardWidth):
-            for j in range(constants.boardHeight):
-                winner = self.isThisIndexPartOfNConnected(i,j)
-                if (winner != 0):
-                    return winner
+        horizontal = self.checkHorizontal()
+        print(horizontal)
+        if (horizontal == 0):
+            return horizontal
+        #check horizontal
+        #check vertical
+        #check diagonal
 
-    def isThisIndexPartOfNConnected(self, i, j):
-        if (i <= constants.boardHeight - constants.connectNumber):
-            #check down
-        if (j <= constants.boardWidth - constants.connectNumber):
-            #check right
-        #
+
+    def checkHorizontal(self):
+        lastStartIdx = constants.boardWidth - constants.connectNumber
+        lastEndIdx = constants.boardWidth
+        startIdx = 0
+        endIdx = 1
+        currLength = 0
+        for i in range(constants.boardHeight):
+            while(startIdx <= lastStartIdx and endIdx <= lastEndIdx):
+                currLength = endIdx - startIdx
+                if (self.getBoard()[i, endIdx] == self.getBoard()[i, endIdx - 1]):
+                    endIdx += 1
+                else:
+                    startIdx += 1
+                    endIdx = startIdx + 1
+                    continue
+                if (currLength >= constants.connectNumber):
+                    return self.getBoard()[i, endIdx]       #player number
+
+    def checkVertical(self):
+        return 0
+
+    def checkDiagonal(self):
+        return 0
 
 
 class Player:

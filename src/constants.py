@@ -6,8 +6,8 @@
 
 validBoardValues = [0, 1, 2]
 
-boardWidth = 7
-boardHeight = 6
+boardWidth = 7 #n cols
+boardHeight = 6 #n rows
 
 connectNumber = 4
 
