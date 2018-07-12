@@ -92,13 +92,17 @@ class Board:
 
     def areNConnected(self):            #returns 0 for no winner, or player number
         horizontal = self.checkHorizontal()
-        print(horizontal)
-        if (horizontal == 0):
+        if (horizontal is not None):
             return horizontal
-        #check horizontal
-        #check vertical
-        #check diagonal
 
+        vertical = self.checkVertical()
+        print(str(vertical))
+        if (vertical is not None):
+            return vertical
+
+        diagonal = self.checkDiagonal()
+        if (diagonal is not None):
+            return diagonal
 
     def checkHorizontal(self):
         lastStartIdx = constants.boardWidth - constants.connectNumber
@@ -109,20 +113,39 @@ class Board:
         for i in range(constants.boardHeight):
             while(startIdx <= lastStartIdx and endIdx <= lastEndIdx):
                 currLength = endIdx - startIdx
+                if (currLength >= constants.connectNumber):
+                    return self.getBoard()[i, endIdx - 1]       #player number
                 if (self.getBoard()[i, endIdx] == self.getBoard()[i, endIdx - 1]):
                     endIdx += 1
                 else:
                     startIdx += 1
                     endIdx = startIdx + 1
-                    continue
-                if (currLength >= constants.connectNumber):
-                    return self.getBoard()[i, endIdx]       #player number
+        return None
 
-    def checkVertical(self):
-        return 0
+    def checkVertical(self): #not working? TODO
+        lastStartIdx = constants.boardHeight - constants.connectNumber
+        lastEndIdx = constants.boardHeight
+        startIdx = 0
+        endIdx = 1
+        currLength = 0
+        for i in range(constants.boardWidth):
+            while(startIdx <= lastStartIdx and endIdx <= lastEndIdx):
+                currLength = endIdx - startIdx
+                print("i: " + str(i))
+                print("startIdx " + str(startIdx))
+                print("endIdx " + str(endIdx))
+                print("currLength " + str(currLength))
+                if (currLength >= constants.connectNumber):
+                    return self.getBoard()[endIdx - 1, i]       #player number
+                if (self.getBoard()[endIdx, i] == self.getBoard()[endIdx - 1, i]):
+                    endIdx += 1
+                else:
+                    startIdx += 1
+                    endIdx = startIdx + 1
+        return None
 
     def checkDiagonal(self):
-        return 0
+        return None
 
 
 class Player:

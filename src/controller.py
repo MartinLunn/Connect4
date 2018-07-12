@@ -32,8 +32,19 @@ def main():
 
     controller.getModel().makeMove(6, 1)
     controller.getModel().makeMove(6, 22)
-    controller.getModel().makeMove(0, 21)
+    #controller.getModel().makeMove(0, 21)
     #controller.getModel().makeMove(0, 22)  #expected failure
+    controller.getModel().makeMove(0, 11)
+    #controller.getModel().makeMove(1, 11)
+    #controller.getModel().makeMove(2, 11)
+    #controller.getModel().makeMove(2, 11)
+    #controller.getModel().makeMove(3, 11)
+    #controller.getModel().makeMove(3, 11)
+    #controller.getModel().makeMove(3, 11)
+    controller.getModel().makeMove(4, 11)
+    controller.getModel().makeMove(4, 11)
+    controller.getModel().makeMove(4, 11)
+    controller.getModel().makeMove(4, 11)
 
     controller.getView().printConsole(controller.getModel().getBoard().getBoard())
 
